@@ -28,11 +28,13 @@ class MainActivity: BaseActivity<MainPresenter>(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding(R.layout.activity_main)
+        presenter!!.getUser("isfaaghyth")
     }
 
     @OnClick(R.id.btn_cari)
     internal fun onFindClicked() {
         val username: String? = edtUsername.text.toString()
+        Log.d("TAG", username)
         presenter!!.getUser(username!!)
     }
 

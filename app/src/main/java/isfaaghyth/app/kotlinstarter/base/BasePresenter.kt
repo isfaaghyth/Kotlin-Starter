@@ -1,12 +1,12 @@
 package isfaaghyth.app.kotlinstarter.base
 
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import isfaaghyth.app.kotlinstarter.network.NetworkClient
 import isfaaghyth.app.kotlinstarter.network.Routes
-import rx.Observable
-import rx.Subscriber
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
-import rx.subscriptions.CompositeSubscription
+import io.reactivex.Observable
+import io.reactivex.observers.ResourceObserver
 
 /**
  * Created by isfaaghyth on 11/7/17.
@@ -15,8 +15,7 @@ import rx.subscriptions.CompositeSubscription
 open class BasePresenter<V> {
     protected var view: V?=null
     protected var service: Routes?=null
-    var compositeSubscription: CompositeSubscription?=null
-    var subscriber: Subscriber<*>?=null
+    var compositeDisposable: CompositeDisposable?=null
 
     fun attachView(view: V) {
         this.view = view
@@ -25,24 +24,24 @@ open class BasePresenter<V> {
 
     fun dettachView() {
         this.view = view
-        if (compositeSubscription != null && compositeSubscription!!.hasSubscriptions())
-            compositeSubscription!!.unsubscribe()
+        if (compositeDisposable != null)
+            compositeDisposable!!.clear()
             stopSubscribe()
     }
 
-    fun subscribe(observable: Observable<*>, subscriber: Subscriber<*>) {
-        this.subscriber = subscriber
-        if (compositeSubscription == null)
-            compositeSubscription = CompositeSubscription()
+    fun subscribe(observable: Observable<*>, resources: ResourceObserver<*>) {
+        if (compositeDisposable == null)
+            compositeDisposable = CompositeDisposable()
 
-        compositeSubscription!!.add(observable
-                .observeOn(Schedulers.newThread())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe {subscriber})
+        compositeDisposable!!.add(observable
+                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({resources}))
     }
 
     fun stopSubscribe() {
-        if (subscriber != null)
-            subscriber!!.unsubscribe()
+        if (compositeDisposable != null)
+            compositeDisposable!!.clear()
     }
 }
