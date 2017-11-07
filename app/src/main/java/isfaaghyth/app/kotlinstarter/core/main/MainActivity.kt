@@ -9,7 +9,6 @@ import butterknife.OnClick
 import isfaaghyth.app.kotlinstarter.R
 import isfaaghyth.app.kotlinstarter.base.BaseActivity
 import isfaaghyth.app.kotlinstarter.models.User
-import isfaaghyth.app.kotlinstarter.utils.Loader
 
 /**
  * Created by isfaaghyth on 11/7/17.
