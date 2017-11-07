@@ -12,13 +12,13 @@ import rx.subscriptions.CompositeSubscription
  * Created by isfaaghyth on 11/7/17.
  * github: @isfaaghyth
  */
-open class BasePresenter<V>(view: V) {
+open class BasePresenter<V> {
     protected var view: V?=null
     protected var service: Routes?=null
     var compositeSubscription: CompositeSubscription?=null
     var subscriber: Subscriber<*>?=null
 
-    init {
+    fun attachView(view: V) {
         this.view = view
         service = NetworkClient.instance.create(Routes::class.java)
     }

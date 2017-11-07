@@ -9,7 +9,11 @@ import rx.Subscriber
  * Created by isfaaghyth on 11/7/17.
  * github: @isfaaghyth
  */
-class MainPresenter(view: MainView): BasePresenter<MainView>(view) {
+class MainPresenter(view: MainView): BasePresenter<MainView>() {
+
+    init {
+        super.attachView(view)
+    }
 
     fun getUser(username: String) {
         subscribe(service!!.getUser(username), object : Subscriber<Response<User>>() {
