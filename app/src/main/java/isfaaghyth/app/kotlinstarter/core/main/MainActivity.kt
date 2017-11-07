@@ -1,20 +1,15 @@
 package isfaaghyth.app.kotlinstarter.core.main
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.OnClick
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import isfaaghyth.app.kotlinstarter.R
 import isfaaghyth.app.kotlinstarter.base.BaseActivity
 import isfaaghyth.app.kotlinstarter.models.User
-import isfaaghyth.app.kotlinstarter.network.NetworkClient
-import isfaaghyth.app.kotlinstarter.network.Routes
+import isfaaghyth.app.kotlinstarter.utils.Loader
 
 /**
  * Created by isfaaghyth on 11/7/17.
@@ -39,15 +34,16 @@ class MainActivity: BaseActivity<MainPresenter>(), MainView {
     internal fun onFindClicked() {
         val username: String? = edtUsername.text.toString()
         message("username $username")
-        presenter?.getUser()
+        presenter?.getUser(username!!)
     }
 
     override fun onError(err: String) {
-        Log.e("TAG", err)
+        message(err)
     }
 
     override fun onSuccess(user: User) {
-        message("ini apa? ${user.name}")
+        txtName.text = user.name
+        txtBio.text = user.avatar_user
     }
 
 }

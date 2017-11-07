@@ -2,7 +2,7 @@ package isfaaghyth.app.kotlinstarter.core.main
 
 import isfaaghyth.app.kotlinstarter.base.BasePresenter
 import isfaaghyth.app.kotlinstarter.models.User
-import isfaaghyth.app.kotlinstarter.network.RequestCallback
+import isfaaghyth.app.kotlinstarter.utils.ScheduleUtils
 import retrofit2.Response
 
 /**
@@ -15,10 +15,14 @@ class MainPresenter(view: MainView): BasePresenter<MainView>() {
         super.attachView(view)
     }
 
-    fun getUser() {
-        service?.getUser()?.let {
-            subscribe(it)
-        }
+    fun getUser(username: String) {
+        subscribe(service?.getUser(username)!!
+                .compose(ScheduleUtils.set<Response<User>>())
+                .subscribe(
+                        {res -> res.body()?.let { view?.onSuccess(it) } },
+                        {err -> view?.onError(err.message!!)},
+                        {}
+                ))
     }
 
 }
