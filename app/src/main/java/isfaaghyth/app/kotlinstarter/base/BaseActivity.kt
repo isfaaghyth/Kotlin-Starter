@@ -1,6 +1,7 @@
 package isfaaghyth.app.kotlinstarter.base
 
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import butterknife.ButterKnife
 
 /**
@@ -22,6 +23,10 @@ abstract class BaseActivity<P: BasePresenter<*>>: AppCompatActivity() {
         super.onDestroy()
         if (presenter != null)
             presenter!!.dettachView()
+    }
+
+    protected fun message(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
 }

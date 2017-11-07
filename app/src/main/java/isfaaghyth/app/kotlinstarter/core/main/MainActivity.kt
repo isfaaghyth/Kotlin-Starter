@@ -7,9 +7,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.OnClick
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import isfaaghyth.app.kotlinstarter.R
 import isfaaghyth.app.kotlinstarter.base.BaseActivity
-import isfaaghyth.app.kotlinstarter.models.Post
+import isfaaghyth.app.kotlinstarter.models.User
+import isfaaghyth.app.kotlinstarter.network.NetworkClient
+import isfaaghyth.app.kotlinstarter.network.Routes
 
 /**
  * Created by isfaaghyth on 11/7/17.
@@ -28,21 +33,21 @@ class MainActivity: BaseActivity<MainPresenter>(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding(R.layout.activity_main)
-        presenter!!.getPosts()
     }
 
     @OnClick(R.id.btn_cari)
     internal fun onFindClicked() {
         val username: String? = edtUsername.text.toString()
-        Log.d("TAG", username)
+        message("username $username")
+        presenter?.getUser()
     }
 
     override fun onError(err: String) {
         Log.e("TAG", err)
     }
 
-    override fun onSuccess(post: Post) {
-        Log.d("TAG", post.status)
+    override fun onSuccess(user: User) {
+        message("ini apa? ${user.name}")
     }
 
 }

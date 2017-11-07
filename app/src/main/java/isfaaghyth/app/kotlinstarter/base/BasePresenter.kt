@@ -1,12 +1,16 @@
 package isfaaghyth.app.kotlinstarter.base
 
+import io.reactivex.CompletableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import isfaaghyth.app.kotlinstarter.network.NetworkClient
 import isfaaghyth.app.kotlinstarter.network.Routes
 import io.reactivex.Observable
-import io.reactivex.observers.ResourceObserver
+import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableObserver
+import isfaaghyth.app.kotlinstarter.network.RequestCallback
+import org.reactivestreams.Subscription
 
 /**
  * Created by isfaaghyth on 11/7/17.
@@ -29,15 +33,10 @@ open class BasePresenter<V> {
             stopSubscribe()
     }
 
-    fun subscribe(observable: Observable<*>, resources: ResourceObserver<*>) {
+    fun subscribe(disposable: Disposable) {
         if (compositeDisposable == null)
             compositeDisposable = CompositeDisposable()
-
-        compositeDisposable!!.add(observable
-                .subscribeOn(Schedulers.newThread())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({resources}))
+        compositeDisposable!!.add(disposable)
     }
 
     fun stopSubscribe() {
