@@ -9,7 +9,7 @@ import butterknife.BindView
 import butterknife.OnClick
 import isfaaghyth.app.kotlinstarter.R
 import isfaaghyth.app.kotlinstarter.base.BaseActivity
-import isfaaghyth.app.kotlinstarter.models.User
+import isfaaghyth.app.kotlinstarter.models.Post
 
 /**
  * Created by isfaaghyth on 11/7/17.
@@ -28,22 +28,21 @@ class MainActivity: BaseActivity<MainPresenter>(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding(R.layout.activity_main)
-        presenter!!.getUser("isfaaghyth")
+        presenter!!.getPosts()
     }
 
     @OnClick(R.id.btn_cari)
     internal fun onFindClicked() {
         val username: String? = edtUsername.text.toString()
         Log.d("TAG", username)
-        presenter!!.getUser(username!!)
     }
 
     override fun onError(err: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Log.e("TAG", err)
     }
 
-    override fun onSuccess(user: User) {
-        Log.d("TAG", user.name)
+    override fun onSuccess(post: Post) {
+        Log.d("TAG", post.status)
     }
 
 }

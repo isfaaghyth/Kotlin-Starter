@@ -12,7 +12,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
-        buildConfigField("String", "MAIN_URL", "\"https://api.github.com\"")
+        buildConfigField("String", "MAIN_URL", "\"http://nfkita.com\"")
     }
     buildTypes {
         release {

@@ -2,7 +2,7 @@ package isfaaghyth.app.kotlinstarter.core.main
 
 import io.reactivex.observers.ResourceObserver
 import isfaaghyth.app.kotlinstarter.base.BasePresenter
-import isfaaghyth.app.kotlinstarter.models.User
+import isfaaghyth.app.kotlinstarter.models.Post
 import retrofit2.Response
 
 /**
@@ -15,13 +15,14 @@ class MainPresenter(view: MainView): BasePresenter<MainView>() {
         super.attachView(view)
     }
 
-    fun getUser(username: String) {
-        subscribe(service!!.getUser(username), object : ResourceObserver<Response<User>>() {
+    fun getPosts() {
+        service?.getPosts()?.let {
+            subscribe(it, object : ResourceObserver<Response<Post>>() {
             override fun onComplete() {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
-            override fun onNext(result: Response<User>?) {
+            override fun onNext(result: Response<Post>?) {
                 if (result!!.isSuccessful) {
                     result.body()?.let {
                         view!!.onSuccess(it)
@@ -30,12 +31,11 @@ class MainPresenter(view: MainView): BasePresenter<MainView>() {
             }
 
             override fun onError(e: Throwable?) {
-                e!!.message?.let {
-                    view!!.onError(it)
-                }
+                view!!.onError(e!!.message!!)
             }
 
         })
+        }
     }
 
 }

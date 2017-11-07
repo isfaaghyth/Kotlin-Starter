@@ -1,10 +1,9 @@
 package isfaaghyth.app.kotlinstarter.network
 
 import io.reactivex.Observable
-import isfaaghyth.app.kotlinstarter.models.User
+import isfaaghyth.app.kotlinstarter.models.Post
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Path
 
 /**
  * Created by isfaaghyth on 11/7/17.
@@ -16,7 +15,7 @@ interface Routes {
     * @param: github_username
     * Mendapatkan profil github berdasarkan username
     * */
-    @GET("/users/{github_username}")
-    fun getUser(@Path("github_username") username: String): Observable<Response<User>>
+    @GET("/?json=1")
+    fun getPosts(): Observable<Response<Post>>
 
 }
