@@ -8,6 +8,9 @@ Kotlin starter with reactive paradigm
 - [x] rxjava2
 - [x] butterknife
 - [x] glide
+
+### TODO
+alternative library
 - [ ] anko
 
 ## disclaimer
