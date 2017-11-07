@@ -12,7 +12,7 @@ import rx.subscriptions.CompositeSubscription
  * Created by isfaaghyth on 11/7/17.
  * github: @isfaaghyth
  */
-class BasePresenter<V>(view: V) {
+open class BasePresenter<V>(view: V) {
     protected var view: V?=null
     protected var service: Routes?=null
     var compositeSubscription: CompositeSubscription?=null
