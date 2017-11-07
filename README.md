@@ -1,9 +1,16 @@
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/isfaaghyth/Kotlin-Starter)
 
-# Kotlin-Starter
+# Kotlin Starter
 Kotlin starter with reactive paradigm
 
-## Disclaimer
+## awesome libraries
+- [x] retrofit2
+- [x] rxjava2
+- [x] butterknife
+- [x] glide
+- [ ] anko
+
+## disclaimer
 
 feel free to forks (re: contribute)!
 
