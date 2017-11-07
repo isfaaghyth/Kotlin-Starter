@@ -15,6 +15,8 @@ alternative library
 
 ## disclaimer
 
+don't forget to click ★ above;
+
 feel free to forks (re: contribute)!
 
 please help me to improving my kotlin knowledge and contribute for FOSS.
