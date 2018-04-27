@@ -11,7 +11,7 @@ Kotlin starter with reactive paradigm
 
 ### TODO
 alternative library
-- [ ] anko
+- [ ] dagger
 
 ## disclaimer
 
